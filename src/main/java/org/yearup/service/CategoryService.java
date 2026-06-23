@@ -5,6 +5,7 @@ import org.yearup.models.Category;
 import org.yearup.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService
@@ -18,30 +19,28 @@ public class CategoryService
 
     public List<Category> getAllCategories()
     {
-        // get all categories
-        return null;
+        return categoryRepository.findAll();
     }
 
-    public Category getById(int categoryId)
-    {
-        // get category by id
-        return null;
+    public Optional<Category> getCategoryById(int categoryId) {
+        return categoryRepository.findById(categoryId);
     }
 
     public Category create(Category category)
     {
-        // create a new category
-        return null;
+        return categoryRepository.save(category);
     }
 
     public Category update(int categoryId, Category category)
     {
-        // update category and return the updated category
-        return null;
+        Category existing = categoryRepository.findById(categoryId).orElseThrow();
+        existing.setName(category.getName());
+        existing.setDescription(category.getDescription());
+        return categoryRepository.save(existing);
     }
 
     public void delete(int categoryId)
     {
-        // delete category
+        categoryRepository.deleteById(categoryId);
     }
 }
