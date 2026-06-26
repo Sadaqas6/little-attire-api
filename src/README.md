@@ -40,13 +40,14 @@ Update `src/main/resources/application.properties` to point at the `littleattire
 
 ## Screenshots
 
+*(Add screenshots here: home page with product grid, cart page, profile page, and an Insomnia request/response example.)*
 
-![Home page](screenshots/home.png)
-![Cart page](screenshots/cart.png)
-![Profile page](screenshots/profile.png)
-![Insomnia example](screenshots/insomnia-example.png)
+![Home page](../screenshots/home.png)
+![Cart page](../screenshots/cart.png)
+![Profile page](../screenshots/profile.png)
+![Insomnia example](../screenshots/insomnia-example.png)
 
-## Interesting Code: Building the Shopping Cart from the Database
+## Interesting Code: Adding a "Create Account" Flow
 
 The starter frontend only had a login modal — there was no way for a new user to actually register through the UI, even though the backend already had a working `POST /register` endpoint. I added a full registration flow without needing to touch the backend at all, by reusing the existing modal pattern.
 
@@ -57,13 +58,13 @@ function showRegisterForm()
 {
     templateBuilder.build('register-form', {}, 'login');
 }
- 
+
 function register()
 {
     const username = document.getElementById("register-username").value;
     const password = document.getElementById("register-password").value;
     const confirm = document.getElementById("register-confirm").value;
- 
+
     userService.register(username, password, confirm);
     hideModalForm();
 }
@@ -77,13 +78,14 @@ axios.post(url, register)
          const data = {
              message: "Account created! You can now log in."
          };
- 
+
          templateBuilder.append("message", data, "errors")
          showLoginForm();
      })
 ```
 
-What made this interesting to build was realizing the backend was already fully capable of handling registration — `POST /register` worked from day one in Insomnia — but nobody could reach it from the actual website. The fix wasn't new backend logic at all; it was noticing a gap between what the API could do and what the UI exposed, then closing that gap by following the same modal-building pattern the login form already used
+What made this interesting to build was realizing the backend was already fully capable of handling registration — `POST /register` worked from day one in Insomnia — but nobody could reach it from the actual website. The fix wasn't new backend logic at all; it was noticing a gap between what the API could do and what the UI exposed, then closing that gap by following the same modal-building pattern the login form already used.
+
 ## Future Versions
 
 Features considered for future iterations, in rough priority order:
@@ -92,4 +94,3 @@ Features considered for future iterations, in rough priority order:
 2. **Product reviews/ratings** — allow customers to leave reviews on purchased products.
 3. **Wishlist** — separate from the cart, a saved-for-later list.
 4. **Admin dashboard UI** — a dedicated frontend view for managing products/categories instead of requiring Insomnia/API calls.
-
