@@ -40,7 +40,6 @@ Update `src/main/resources/application.properties` to point at the `littleattire
 
 ## Screenshots
 
-*(Add screenshots here: home page with product grid, cart page, profile page, and an Insomnia request/response example.)*
 
 ![Home page](../screenshots/home.png)
 ![Cart page](../screenshots/cart.png)
